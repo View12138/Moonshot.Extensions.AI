@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>$(MSBuildProjectName)-Community</AssemblyName>
+		<RootNamespace>Moonshot.Extensions.AI</RootNamespace>
+		<Description>Implementation of generative AI abstractions for OpenAI-compatible endpoints.</Description>
+		<Workstream>AI</Workstream>
+		<ForceLatestDotnetVersions>true</ForceLatestDotnetVersions>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Stage>normal</Stage>
+		<EnablePackageValidation>false</EnablePackageValidation>
+		<MinCodeCoverage>75</MinCodeCoverage>
+		<MinMutationScore>50</MinMutationScore>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFrameworks>net462;net8.0;net9.0;net10.0;netstandard2.0</TargetFrameworks>
+		<NoWarn>$(NoWarn);CA1063;</NoWarn>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<DisableMinimumSupportedTfmCompatErrors>true</DisableMinimumSupportedTfmCompatErrors>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<InjectCompilerFeatureRequiredOnLegacy>true</InjectCompilerFeatureRequiredOnLegacy>
+		<InjectExperimentalAttributeOnLegacy>true</InjectExperimentalAttributeOnLegacy>
+		<InjectMediaTypeMapOnLegacy>true</InjectMediaTypeMapOnLegacy>
+		<InjectRequiredMemberOnLegacy>true</InjectRequiredMemberOnLegacy>
+		<InjectSharedDiagnosticIds>true</InjectSharedDiagnosticIds>
+		<InjectStringHashOnLegacy>true</InjectStringHashOnLegacy>
+	</PropertyGroup>
+
+	<ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+		<PackageReference Include="System.Text.Json" Version="10.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="10.4.1" />
+		<PackageReference Include="MoonshotAI-Community" Version="2.9.1" />
+	</ItemGroup>
+
+</Project>
