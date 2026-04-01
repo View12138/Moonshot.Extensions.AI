@@ -1,0 +1,3 @@
+[submodule "extern/extensions"]
+	path = extern/extensions
+	url = https://github.com/dotnet/extensions.git
