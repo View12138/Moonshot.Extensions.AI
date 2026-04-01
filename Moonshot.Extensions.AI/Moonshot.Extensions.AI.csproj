@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<AssemblyName>$(MSBuildProjectName)-Community</AssemblyName>
 		<RootNamespace>Moonshot.Extensions.AI</RootNamespace>
-		<Description>Implementation of generative AI abstractions for OpenAI-compatible endpoints.</Description>
+		<Description>Implementation of generative AI abstractions for Moonshot and OpenAI-compatible endpoints.</Description>
 		<Workstream>AI</Workstream>
 		<ForceLatestDotnetVersions>true</ForceLatestDotnetVersions>
 		<LangVersion>latest</LangVersion>
@@ -43,4 +43,55 @@
 		<PackageReference Include="MoonshotAI-Community" Version="2.9.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<!--Microsoft.Extensions.AI.OpenAI-->
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Libraries\Microsoft.Extensions.AI.OpenAI\**\*.cs" />
+
+		<!--dependents-->
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\ExperimentalAttribute\ExperimentalAttribute.cs" Link="LegacySupport\ExperimentalAttribute\ExperimentalAttribute.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\DiagnosticAttributes\NullableAttributes.cs" Link="LegacySupport\DiagnosticAttributes\NullableAttributes.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\MediaTypeMap\MediaTypeMap.cs" Link="LegacySupport\MediaTypeMap\MediaTypeMap.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\StringHash\StringHash.cs" Link="LegacySupport\StringHash\StringHash.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Shared\DiagnosticIds\DiagnosticIds.cs" Link="Shared\DiagnosticIds\DiagnosticIds.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Shared\Throw\Throw.cs" Link="Shared\Throw\Throw.cs" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<None Include="$(SolutionDir)eng\MoonshotAI.png" Pack="true" PackagePath="\" />
+		<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<!-- Common Project Metadata -->
+	<PropertyGroup>
+		<Copyright>Copyright (c) 2026 View12138</Copyright>
+		<Company>View12138</Company>
+		<Authors>$(Company)</Authors>
+		<RepositoryUrl>https://github.com/View12138/Moonshot.Extensions.AI</RepositoryUrl>
+		<NeutralLanguage>en-US</NeutralLanguage>
+	</PropertyGroup>
+	
+	<!-- Versioning -->
+	<PropertyGroup>
+		<VersionPrefix>10.4.1</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<InformationalVersion>$(Version)</InformationalVersion>
+	</PropertyGroup>
+
+	<!-- Publishing -->
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>MoonshotAI.png</PackageIcon>
+		<PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageTags>MoonshotAI;Kimi</PackageTags>
+
+		<!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+		<!-- Create a .snupkg file in addition to the .nupkg file. -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
 </Project>
