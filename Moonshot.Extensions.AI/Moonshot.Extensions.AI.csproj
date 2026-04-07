@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<AssemblyName>$(MSBuildProjectName)-Community</AssemblyName>
+		<AssemblyName>$(MSBuildProjectName).Community</AssemblyName>
 		<RootNamespace>Moonshot.Extensions.AI</RootNamespace>
 		<Description>Implementation of generative AI abstractions for Moonshot and OpenAI-compatible endpoints.</Description>
 		<Workstream>AI</Workstream>
@@ -40,12 +40,13 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="10.4.1" />
-		<PackageReference Include="MoonshotAI-Community" Version="2.9.1" />
+		<PackageReference Include="MoonshotAI.Community" Version="2.9.1-beta3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<!--Microsoft.Extensions.AI.OpenAI-->
-		<Compile Include="$(SolutionDir)\extern\extensions\src\Libraries\Microsoft.Extensions.AI.OpenAI\**\*.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Libraries\Microsoft.Extensions.AI.OpenAI\**\*.cs"
+				 Exclude="$(SolutionDir)\extern\extensions\src\Libraries\Microsoft.Extensions.AI.OpenAI\OpenAIChatClient.cs" />
 
 		<!--dependents-->
 		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\ExperimentalAttribute\ExperimentalAttribute.cs" Link="LegacySupport\ExperimentalAttribute\ExperimentalAttribute.cs" />
@@ -74,7 +75,7 @@
 	<!-- Versioning -->
 	<PropertyGroup>
 		<VersionPrefix>10.4.1</VersionPrefix>
-		<VersionSuffix></VersionSuffix>
+		<VersionSuffix>beta3</VersionSuffix>
 		<InformationalVersion>$(Version)</InformationalVersion>
 	</PropertyGroup>
 

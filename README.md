@@ -7,15 +7,7 @@ Provides an implementation of `IChatClient` and `IEmbeddingGenerator` for Moonsh
 From the command-line:
 
 ```console
-dotnet add package Moonshot.Extensions.AI-Community
-```
-
-Or directly in the C# project file:
-
-```xml
-<ItemGroup>
-  <PackageReference Include="Moonshot.Extensions.AI-Community" Version="10.4.1" />
-</ItemGroup>
+dotnet add package Moonshot.Extensions.AI.Community
 ```
 
 ---
