@@ -1,0 +1,1 @@
+﻿global using CallerArgumentExpressionAttribute = Community.Extensions.AI.CompatibleAI.Extensions.CallerArgumentExpressionAttribute;

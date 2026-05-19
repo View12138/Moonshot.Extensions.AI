@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>Community.Extensions.AI.CompatibleAI</RootNamespace>
+		<Description>Implementation of generative AI abstractions for Moonshot/DeepSeek and OpenAI-compatible endpoints.</Description>
+		<Workstream>AI</Workstream>
+		<ForceLatestDotnetVersions>true</ForceLatestDotnetVersions>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Stage>normal</Stage>
+		<EnablePackageValidation>false</EnablePackageValidation>
+		<MinCodeCoverage>75</MinCodeCoverage>
+		<MinMutationScore>50</MinMutationScore>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFrameworks>net462;net8.0;net9.0;net10.0;netstandard2.0</TargetFrameworks>
+		<NoWarn>$(NoWarn);CA1063;</NoWarn>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<DisableMinimumSupportedTfmCompatErrors>true</DisableMinimumSupportedTfmCompatErrors>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<InjectCompilerFeatureRequiredOnLegacy>true</InjectCompilerFeatureRequiredOnLegacy>
+		<InjectExperimentalAttributeOnLegacy>true</InjectExperimentalAttributeOnLegacy>
+		<InjectMediaTypeMapOnLegacy>true</InjectMediaTypeMapOnLegacy>
+		<InjectRequiredMemberOnLegacy>true</InjectRequiredMemberOnLegacy>
+		<InjectSharedDiagnosticIds>true</InjectSharedDiagnosticIds>
+		<InjectStringHashOnLegacy>true</InjectStringHashOnLegacy>
+	</PropertyGroup>
+
+	<ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+		<PackageReference Include="System.Text.Json" Version="10.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="10.4.1" />
+		<PackageReference Include="CompatibleAI" Version="2.9.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--Microsoft.Extensions.AI.OpenAI-->
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Libraries\Microsoft.Extensions.AI.OpenAI\**\*.cs" Exclude="$(SolutionDir)\extern\extensions\src\Libraries\Microsoft.Extensions.AI.OpenAI\OpenAIChatClient.cs" />
+
+		<!--dependents-->
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\ExperimentalAttribute\ExperimentalAttribute.cs" Link="LegacySupport\ExperimentalAttribute\ExperimentalAttribute.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\DiagnosticAttributes\NullableAttributes.cs" Link="LegacySupport\DiagnosticAttributes\NullableAttributes.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\MediaTypeMap\MediaTypeMap.cs" Link="LegacySupport\MediaTypeMap\MediaTypeMap.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\LegacySupport\StringHash\StringHash.cs" Link="LegacySupport\StringHash\StringHash.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Shared\DiagnosticIds\DiagnosticIds.cs" Link="Shared\DiagnosticIds\DiagnosticIds.cs" />
+		<Compile Include="$(SolutionDir)\extern\extensions\src\Shared\Throw\Throw.cs" Link="Shared\Throw\Throw.cs" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<None Include="$(SolutionDir)eng\CompatibleAI.png" Pack="true" PackagePath="\" />
+		<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<!-- Common Project Metadata -->
+	<PropertyGroup>
+		<Copyright>Copyright (c) 2026 View12138</Copyright>
+		<Company>View12138</Company>
+		<Authors>$(Company)</Authors>
+		<RepositoryUrl>https://github.com/View12138/Community.Extensions.AI.CompatibleAI</RepositoryUrl>
+		<NeutralLanguage>en-US</NeutralLanguage>
+	</PropertyGroup>
+	
+	<!-- Versioning -->
+	<PropertyGroup>
+		<VersionPrefix>10.4.1</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<InformationalVersion>$(Version)</InformationalVersion>
+	</PropertyGroup>
+
+	<!-- Publishing -->
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>CompatibleAI.png</PackageIcon>
+		<PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageTags>OpenAI;MoonshotAI;Kimi;DeepSeek</PackageTags>
+
+		<!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+		<!-- Create a .snupkg file in addition to the .nupkg file. -->
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+</Project>
